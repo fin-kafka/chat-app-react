@@ -1,20 +1,26 @@
 import React from "react";
-import { setTypingValue, sendMessage } from "actions";
+import { setTypingValue, sendMessage, editMessage } from "actions";
 import store from "store";
 
-const MessageInput = (prop) => {
-  const { value } = prop
+const MessageInput = props => {
+  const { value, editId } = props;
   const state = store.getState();
-  
+
   const handleChange = e => {
     store.dispatch(setTypingValue(e.target.value));
+    props.scrollToBottom(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const { typing, activeUserId } = state;
-    store.dispatch(sendMessage(typing, activeUserId))
-  }
+    editId
+      ? store.dispatch(editMessage(typing, editId, activeUserId))
+      : store.dispatch(sendMessage(typing, activeUserId));
+    props.setEditId("");
+    props.scrollToBottom(true);
+    store.dispatch(setTypingValue(""));
+  };
 
   return (
     <form className="Message" onSubmit={handleSubmit}>

@@ -140,6 +140,7 @@
   border-bottom-right-radius: 10px;
 }
 .Chat.is-user-msg {
+  position: relative;
   margin-left: auto;
   background: #2b2c33;
   border-top-right-radius: 0;
@@ -166,4 +167,17 @@
   border-radius: 10px;
   font-size: 1rem;
   outline: 0;
+}
+
+.is-user-msg:hover .delete-message:before {
+  content: 'X'
+}
+.is-user-msg:hover .delete-message {
+  position: absolute;
+  left: -10px;
+  top: -9px;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #7F3333;
 }

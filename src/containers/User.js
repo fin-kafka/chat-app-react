@@ -1,13 +1,14 @@
 import React from "react";
-import store from 'store';
-import { setActiveUserId } from 'actions';
+import store from "store";
+import { setActiveUserId, setTypingValue } from "actions";
 
 const User = ({ user }) => {
   const { name, profile_pic, status, user_id } = user;
 
-  const handleUserClick = (user_id) => {
+  const handleUserClick = user_id => {
     store.dispatch(setActiveUserId(user_id));
-  }
+    store.dispatch(setTypingValue(""));
+  };
 
   return (
     <div className="User" onClick={() => handleUserClick(user_id)}>
