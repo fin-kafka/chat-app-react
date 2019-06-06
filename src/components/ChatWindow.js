@@ -8,7 +8,7 @@ import _ from "lodash";
 const ChatWindow = ({ activeUserId }) => {
   const state = store.getState();
   const activeUser = state.contacts[activeUserId];
-  const activeMsgs = state.chat[activeUserId];
+  const activeMsgs = state.chat.toJS()[activeUserId];
   const { typing } = state;
 
   const [id, setId] = useState("");

@@ -23,12 +23,14 @@ export default class Chats extends Component {
   componentDidMount() {
     this.scrollToBottom();
   }
+  componentWillReceiveProps(props){
+    return props.setScroll ? this.scrollToBottom() : null;
+  }
   componentDidUpdate(props) {
     return props.setScroll ? this.scrollToBottom() : null;
   }
   scrollToBottom = () => {
-    this.chatsRef.current.scrollTop = this.chatsRef.current.scrollHeight;
-  };
+    window.scrollTo({ behavior: 'smooth', top: this.chatsRef.current.offsetTop })  };
 
   handleEdit = (e, id) => {
     store.dispatch(setTypingValue(e.target.textContent));
