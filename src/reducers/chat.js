@@ -11,9 +11,13 @@ export default (state = Map(getMessages(10)), action) => {
   switch (action.type) {
     case SEND_MESSAGE:
       const { message, userId } = action.payload;
-      const allUserMsgs = state[userId];
+      const allUserMsgs = state.get(userId);
       const number = +_.keys(allUserMsgs).pop() + 1;
-      return state.set({ number, text: message, is_user_msg: true });
+      return state.setIn([userId, number], {
+        number,
+        text: message,
+        is_user_msg: true
+      });
     case DELETE_MESSAGE:
       return state.removeIn([action.payload.user, action.payload.messageId]);
     case EDIT_MESSAGE:
